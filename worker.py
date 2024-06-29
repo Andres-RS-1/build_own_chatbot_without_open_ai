@@ -70,11 +70,8 @@ def process_document(document_path):
     # Create an embeddings database using Chroma from the split text chunks.
     db = Chroma.from_documents(texts, embedding=embeddings)
 
-
-    # --> Build the QA chain, which utilizes the LLM and retriever for answering questions. 
     # By default, the vectorstore retriever uses similarity search. 
     # If the underlying vectorstore support maximum marginal relevance search, you can specify that as the search type (search_type="mmr").
-    # You can also specify search kwargs like k to use when doing retrieval. k represent how many search results send to llm
     conversation_retrieval_chain = RetrievalQA.from_chain_type(
         llm=llm_hub,
         chain_type="stuff",
